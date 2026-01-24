@@ -11,13 +11,26 @@
         "wordpress/mcp-adapter": "^0.4.1"
     },
     "require-dev": {
-        "roots/wordpress-no-content": "6.9"
+        "phpstan/phpstan": "^2.1.0",
+        "roots/wordpress-no-content": "6.9",
+        "wp-coding-standards/wpcs": "^3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "lloc\\AdminOverloadToAIAssistant\\": "src/"
+        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
     "config": {
         "allow-plugins": {
-            "composer/installers": true
+            "composer/installers": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true
         }
+    },
+    "scripts": {
+        "phpcs": "@php ./vendor/bin/phpcs",
+        "phpcs:fix": "@php ./vendor/bin/phpcbf",
+        "phpstan": "@php ./vendor/bin/phpstan analyse --memory-limit=1G"
     }
 }
