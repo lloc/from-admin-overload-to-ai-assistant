@@ -1,0 +1,23 @@
+{
+    "name": "lloc/from-admin-overload-to-ai-assistant",
+    "description": "From Admin Overload to AI Assistant: Scale WordPress with intelligence",
+    "version": "0.0.1",
+    "type": "wordpress-plugin",
+    "license": "GPL-2.0-or-later",
+    "require": {
+        "php": ">=8.3",
+        "composer/installers": "~2.3.0",
+        "wordpress/abilities-api": "^0.4.0",
+        "wordpress/mcp-adapter": "^0.4.1"
+    },
+    "require-dev": {
+        "roots/wordpress-no-content": "6.9"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true
+        }
+    }
+}
