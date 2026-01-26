@@ -13,8 +13,10 @@
 
 declare(strict_types=1);
 
-namespace FromAdminOverloadToAIAssistant;
+namespace lloc\FromAdminOverloadToAIAssistant;
 
 defined( 'ABSPATH' ) || exit;
 
 require_once __DIR__ . '/vendor/autoload.php';
+
+Plugin::init();
