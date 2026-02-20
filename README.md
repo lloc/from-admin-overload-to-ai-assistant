@@ -18,7 +18,7 @@ composer install
 Install wp-env globally:
 
 ```bash
-npm -g install @wordpress/env
+npm install -g @wordpress/env
 ```
 
 Start the local environment:
@@ -36,15 +36,51 @@ wp-env start
 
 This project uses the [MCP Adapter](https://github.com/WordPress/mcp-adapter) to expose WordPress abilities to AI agents via the Model Context Protocol.
 
-Configure your MCP client (Claude Code, VS Code, Cursor, etc.):
-
-Generate the base64-encoded credentials:
+### 1. Generate credentials
 
 ```bash
 echo -n "username:application-password" | base64
 ```
 
-Configure your MCP client:
+### 2. Connect your AI client
+
+#### Claude Code (CLI)
+
+Add the server to your project (stored in `.mcp.json`):
+
+```bash
+claude mcp add --transport http --scope project \
+  --header "Authorization: Basic <base64>" \
+  wordpress http://localhost:8888/wp-json/mcp/mcp-adapter-default-server
+```
+
+Or add it to your user config (available across all projects):
+
+```bash
+claude mcp add --transport http --scope user \
+  --header "Authorization: Basic <base64>" \
+  wordpress http://localhost:8888/wp-json/mcp/mcp-adapter-default-server
+```
+
+#### Claude Desktop
+
+Edit `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS) or `%APPDATA%\Claude\claude_desktop_config.json` (Windows):
+
+```json
+{
+  "mcpServers": {
+    "wordpress": {
+      "type": "http",
+      "url": "http://localhost:8888/wp-json/mcp/mcp-adapter-default-server",
+      "headers": {
+        "Authorization": "Basic <base64>"
+      }
+    }
+  }
+}
+```
+
+#### Other MCP clients (VS Code, Cursor, etc.)
 
 ```json
 {
@@ -73,38 +109,23 @@ Run WordPress Site Health checks and return results grouped by status.
 |------|------|----------|-------------|
 | `category` | string | No | Filter by category: `security`, `performance`, or empty string for all |
 
-**Example request:**
-
-```bash
-# Using the MCP adapter execute ability
-{
-  "ability_name": "site-health/check",
-  "parameters": {
-    "category": "performance"
-  }
-}
-```
-
 **Example response:**
 
 ```json
 {
-  "success": true,
-  "data": {
-    "summary": {
-      "good": 5,
-      "recommended": 2,
-      "critical": 0
-    },
-    "results": [
-      {
-        "test": "php_version",
-        "label": "Your site is running the current version of PHP (8.3)",
-        "status": "good",
-        "category": "performance"
-      }
-    ]
-  }
+  "summary": {
+    "good": 15,
+    "recommended": 3,
+    "critical": 0
+  },
+  "results": [
+    {
+      "test": "php_version",
+      "label": "Your site is running the current version of PHP (8.3)",
+      "status": "good",
+      "category": ""
+    }
+  ]
 }
 ```
 
