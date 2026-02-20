@@ -17,4 +17,3 @@ class Plugin {
 		return new self();
 	}
 }
-

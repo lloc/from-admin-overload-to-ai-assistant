@@ -16,12 +16,12 @@
             "plugins": [
                 ".",
                 "https://downloads.wordpress.org/plugin/ai.zip",
-                "https://downloads.wordpress.org/plugin/gutenberg.zip",
-                "https://downloads.wordpress.org/plugin/query-monitor.zip"
+                "https://downloads.wordpress.org/plugin/ai-engine.zip"
             ]
         }
     },
     "mappings": {
-        "wp-content/plugins/from-admin-overload-to-ai-assistant": "."
+        "wp-content/plugins/from-admin-overload-to-ai-assistant": ".",
+        "wp-content/mu-plugins/wp-env-loopback-fix.php": "./mu-plugins/wp-env-loopback-fix.php"
     }
 }

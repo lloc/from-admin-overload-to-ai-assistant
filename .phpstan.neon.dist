@@ -1,5 +1,10 @@
+includes:
+    - vendor/phpstan/phpstan-deprecation-rules/rules.neon
+    - vendor/swissspidy/phpstan-no-private/rules.neon
 parameters:
     level: 10
+    scanFiles:
+        - vendor/php-stubs/wordpress-stubs/wordpress-stubs.php
     paths:
         - from-admin-overload-to-ai-assistant.php
         - src
